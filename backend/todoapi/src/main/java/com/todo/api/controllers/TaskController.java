@@ -10,12 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.todo.api.domain.task.Task;
-import com.todo.api.domain.task.TaskRequestDTO;
-import com.todo.api.domain.task.TaskResponseDTO;
+import com.todo.api.dto.TaskRequestDTO;
+import com.todo.api.dto.TaskResponseDTO;
 import com.todo.api.repositories.TaskRepository;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("task")
 public class TaskController {
 
     @Autowired

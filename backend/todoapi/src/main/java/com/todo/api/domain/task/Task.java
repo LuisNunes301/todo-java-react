@@ -1,12 +1,14 @@
 package com.todo.api.domain.task;
 
+import com.todo.api.dto.TaskRequestDTO;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "tasks")
+@Table(name = "task")
 @Entity(name = "task")
 @Getter
 @NoArgsConstructor
