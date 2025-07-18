@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import com.todo.api.domain.task.Task;
 import com.todo.api.dto.TaskRequestDTO;
 import com.todo.api.dto.TaskResponseDTO;
+import com.todo.api.dto.TaskUpdateDTO;
 import com.todo.api.repositories.TaskRepository;
 
 @RestController
@@ -22,11 +23,19 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @PostMapping
-    public ResponseEntity<Void> postTask(@RequestBody @Valid TaskRequestDTO body) {
-        Task savedTask = new Task(body);
+    public ResponseEntity<TaskResponseDTO> postTask(@RequestBody @Valid TaskRequestDTO body) {
+        Task newTask = new Task(body);
+        Task savedTask = taskRepository.save(newTask);
+        return ResponseEntity.ok(new TaskResponseDTO(savedTask));
+    }
 
-        this.taskRepository.save(savedTask);
-        return ResponseEntity.ok().build();
+    @GetMapping
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
+        List<TaskResponseDTO> taskList = taskRepository.findAll()
+                .stream()
+                .map(TaskResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(taskList);
     }
 
     @GetMapping("/{id}")
@@ -36,22 +45,35 @@ public class TaskController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
-        List<TaskResponseDTO> taskList = this.taskRepository.findAll().stream().map(TaskResponseDTO::new).toList();
+    @PatchMapping("/{id}")
+    public ResponseEntity<TaskResponseDTO> updateTask(
+            @PathVariable Long id,
+            @RequestBody @Valid TaskUpdateDTO updateDTO) {
 
-        return ResponseEntity.ok(taskList);
+        return taskRepository.findById(id)
+                .map(task -> {
+                    if (updateDTO.title() != null) {
+                        task.setTitle(updateDTO.title());
+                    }
+                    if (updateDTO.description() != null) {
+                        task.setDescription(updateDTO.description());
+                    }
+                    if (updateDTO.completed() != null) {
+                        task.setCompleted(updateDTO.completed());
+                    }
+
+                    Task updatedTask = taskRepository.save(task);
+                    return ResponseEntity.ok(new TaskResponseDTO(updatedTask));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        Optional<Task> task = taskRepository.findById(id);
-
-        if (task.isPresent()) {
-            taskRepository.deleteById(id);
-            return ResponseEntity.noContent().build(); // 204
-        } else {
-            return ResponseEntity.notFound().build(); // 404
+        if (!taskRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
         }
+        taskRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
