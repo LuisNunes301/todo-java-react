@@ -1,0 +1,44 @@
+.taskList {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: 30px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.sectionTitle {
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.task {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.taskTitle {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.taskDescription {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.taskStatus {
+  color: #555;
+  font-style: italic;
+  margin-bottom: 0;
+}

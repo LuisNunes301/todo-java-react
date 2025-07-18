@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import api from '../api/axios';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import stylesLogin from './Login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,10 +22,14 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
-      <button type="submit">Entrar</button>
+    <div className={stylesLogin.container}>
+      
+    <form onSubmit={handleSubmit} className={stylesLogin.form} >
+      <h2 className={stylesLogin.title}>Faça o login</h2>
+      <input value={email} onChange={(e) => setEmail(e.target.value)} className={stylesLogin.input} placeholder="Email" />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={stylesLogin.input} placeholder="Senha" />
+      <button type="submit" className={stylesLogin.button}>Entrar</button>
     </form>
+    </div>
   );
 }
