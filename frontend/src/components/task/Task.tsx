@@ -66,7 +66,9 @@ export function TaskList() {
               <div key={task.id} className={styles.task}>
                 <div className={styles.taskHeader}>
                   <h3 className={styles.taskTitle}>{task.title}</h3>
-                  <label className={styles.checkboxContainer}>
+
+                </div>
+                   <label className={styles.checkboxContainer}>
                     <input
                       type="checkbox"
                       checked={task.completed}
@@ -79,10 +81,9 @@ export function TaskList() {
                     />
                     <span className={styles.checkmark}></span>
                   </label>
-                </div>
                 <p className={styles.taskDescription}>{task.description}</p>
                 <p className={styles.taskStatus}>
-                  Status: {task.completed ? '✅ Concluída' : '☑ Pendente'}
+                  Status: {task.completed ? 'Concluída' : 'Pendente'}
                 </p>
               </div>
             ))

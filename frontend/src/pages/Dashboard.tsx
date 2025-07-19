@@ -1,11 +1,14 @@
 import { TaskList } from "../components/task/Task";
-
+import styles from "./Dashboard.module.css"
 const Dashboard = () => {
   console.log("Dashboard carregado");
   return (
-    <div>
-      <h1>Dashboard</h1>
+    
+    <div className={styles.container}>
+
+      <h1 className={styles.title}>Dashboard</h1>
       <TaskList />
+
     </div>
   );
 };

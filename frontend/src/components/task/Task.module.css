@@ -1,44 +1,83 @@
 .taskList {
-  padding: 20px;
-  max-width: 800px;
   margin: 0 auto;
+  width: 1200px;
+  display: flex;
 }
 
 .section {
+  font-size: 2rem;
   margin-bottom: 30px;
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
+  width: 80%;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 50px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .sectionTitle {
-  color: #333;
-  border-bottom: 2px solid #eee;
+
+  color: #ffa600;
+  border-bottom: 2px solid #130000;
   padding-bottom: 10px;
   margin-bottom: 15px;
 }
 
 .task {
-  background: white;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: #e4980d;
+  border: 3px;
+  border-style: solid;
+  padding: 60px;
+  margin-bottom: 50px;
+  border-radius: 30px;
+  box-shadow: 9px 9px 1px rgba(0, 0, 0, 0.1);
 }
 
+.taskHeader{
+  width: 20%;
+  height: 10%;
+  padding-top: 30px;
+  background: white;
+  border: 1px solid #000000;
+  /* border-radius: 10%; */
+
+
+}
 .taskTitle {
-  margin-top: 0;
-  color: #2c3e50;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: -1px;
+
+  color: black;
 }
 
 .taskDescription {
-  color: #666;
-  margin-bottom: 8px;
+  color: #000000;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 3px;
+  border-style: solid;
+
+
+  color: #000000;
 }
 
 .taskStatus {
-  color: #555;
-  font-style: italic;
-  margin-bottom: 0;
+  color: #000000;
+  font-size: 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+.checkboxContainer{
+  display: grid;
+  font-size: 10px;
+  justify-content: end;
+}
+input[type="checkbox"] {
+  zoom: 2;
+}
+.checkmark{
+  
 }
