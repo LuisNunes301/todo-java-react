@@ -13,7 +13,7 @@ interface Task {
 export function TaskList() {
   const queryClient = useQueryClient();
 
-    const { data } = useQuery({
+  const { data } = useQuery<Task[]>({
     queryKey: ['tasks'],
     queryFn: async () => {
       const response = await api.get('/task');
@@ -22,12 +22,22 @@ export function TaskList() {
   });
 
   const updateTaskStatus = useMutation({
-    mutationFn: async ({ taskId, completed }: { taskId: number, completed: boolean }) => {
-      const response = await api.patch(`/task/${taskId}`, { completed }, {
-        headers: {
-          'Content-Type': 'application/json',
+    mutationFn: async ({
+      taskId,
+      completed,
+    }: {
+      taskId: number;
+      completed: boolean;
+    }) => {
+      const response = await api.patch(
+        `/task/${taskId}`,
+        { completed },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-      });
+      );
       return response.data;
     },
     onSuccess: () => {
@@ -35,7 +45,7 @@ export function TaskList() {
     },
   });
 
-  const groupedTasks = data?.reduce((acc: Record<string, Task[]>, task: Task) => {
+  const groupedTasks = (data || []).reduce((acc: Record<string, Task[]>, task: Task) => {
     const section = task.section || 'Minhas Tarefas';
     if (!acc[section]) {
       acc[section] = [];
@@ -46,7 +56,7 @@ export function TaskList() {
 
   return (
     <div className={styles.taskList}>
-      {Object.entries(groupedTasks || {}).map(([section, tasks]) => (
+      {Object.entries(groupedTasks).map(([section, tasks]) => (
         <div key={section} className={styles.section}>
           <h2 className={styles.sectionTitle}>{section}</h2>
           {tasks.length === 0 ? (
@@ -63,7 +73,7 @@ export function TaskList() {
                       onChange={(e) => {
                         updateTaskStatus.mutate({
                           taskId: task.id,
-                          completed: e.target.checked
+                          completed: e.target.checked,
                         });
                       }}
                     />
