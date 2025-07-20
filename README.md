@@ -5,6 +5,20 @@ Este projeto é uma aplicação de lista de tarefas (ToDo) com autenticação JW
 * Backend: Spring Boot (Java)
 * Frontend: React com TypeScript (Vite)
 
+
+---
+##  Telas
+<div style="display: flex; gap: 20px; justify-content: center;">
+  <figure>
+    <img src="./assets/login.png" alt="Tela de Login" style="width: 300px; border: 1px solid #ddd;" />
+    <figcaption style="text-align: center; font-weight: bold;">Login</figcaption>
+  </figure>
+  <figure>
+    <img src="./assets/dashboard.png" alt="Painel de Controle" style="width: 300px; border: 1px solid #ddd;" />
+    <figcaption style="text-align: center; font-weight: bold;">Dashboard</figcaption>
+  </figure>
+</div>
+
 ---
 
 ## Tecnologias Usadas
@@ -68,6 +82,7 @@ cd frontend
 npm install
 npm run dev
 ```
+---
 
 O frontend rodará na porta `http://localhost:5173`
 

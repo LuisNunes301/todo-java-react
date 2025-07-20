@@ -2,6 +2,7 @@ import { useState } from 'react';
 import api from '../api/axios';
 import { useAuth } from '../hooks/useAuth';
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { FaLock, FaEnvelope, FaSignInAlt } from 'react-icons/fa';
 import stylesLogin from './Login.module.css';
 import type { AxiosError } from 'axios';
 
@@ -41,14 +42,22 @@ export default function Login() {
   }
 
   return (
-    <div className={stylesLogin.container}>
-      <form onSubmit={handleSubmit} className={stylesLogin.form}>
-        <h2 className={stylesLogin.title}>Faça o login</h2>
-        
-        {error && (
-          <div className={stylesLogin.error}>{error}</div>
-        )}
-        
+  <div className={stylesLogin.container}>
+    <form onSubmit={handleSubmit} className={stylesLogin.form}>
+      <h2 className={stylesLogin.title}>Faça o login</h2>
+      
+      {error && (
+        <div className={stylesLogin.error}>{error}</div>
+      )}
+      
+      <div style={{position: 'relative'}}>
+        <FaEnvelope style={{
+          position: 'absolute',
+          left: '10px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: '#FF4757'
+        }} />
         <input 
           type="email"
           value={email} 
@@ -56,8 +65,18 @@ export default function Login() {
           className={stylesLogin.input} 
           placeholder="Email" 
           required
+          style={{paddingLeft: '35px'}}
         />
-        
+      </div>
+      
+      <div style={{position: 'relative'}}>
+        <FaLock style={{
+          position: 'absolute',
+          left: '10px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: '#FF4757'
+        }} />
         <input 
           type="password" 
           value={password} 
@@ -65,16 +84,18 @@ export default function Login() {
           className={stylesLogin.input} 
           placeholder="Senha" 
           required
+          style={{paddingLeft: '35px'}}
         />
-        
-        <button 
-          type="submit" 
-          className={stylesLogin.button}
-          disabled={loading}
-        >
-          {loading ? 'Carregando...' : 'Entrar'}
-        </button>
-      </form>
-    </div>
-  );
-}
+      </div>
+      
+      <button 
+        type="submit" 
+        className={stylesLogin.button}
+        disabled={loading}
+      >
+        <FaSignInAlt style={{marginRight: '8px'}} />
+        {loading ? 'Carregando...' : 'Entrar'}
+      </button>
+    </form>
+  </div>
+)};
